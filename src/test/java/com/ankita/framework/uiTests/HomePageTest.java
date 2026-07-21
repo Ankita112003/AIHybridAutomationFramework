@@ -1,5 +1,6 @@
 package com.ankita.framework.uiTests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.ankita.framework.base.BaseTest;
@@ -15,7 +16,7 @@ public class HomePageTest extends BaseTest {
 
         String title = homePage.getPageTitle();
 
-        System.out.println("Page Title: " + title);
+        Assert.assertEquals(title, "Automation Exercise", "Homepage title mismatch.");
          
     }
     @Test
@@ -25,19 +26,18 @@ public void verifyHomePageLogo() {
 
     boolean status = homePage.isHomePageVisible();
 
-    System.out.println("Logo Visible: " + status);
+    Assert.assertTrue(status, "Homepage logo is not visible.");
 }
 
     @Test
 public void verifyNavigationToLoginPage() {
 
-    HomePage homePage = new HomePage(driver);
+     HomePage homePage = new HomePage(driver);
 
-    homePage.clickSignupLogin();
+    LoginPage loginPage = homePage.clickSignupLogin();
 
-    LoginPage loginPage = new LoginPage(driver);
+    boolean status = loginPage.isLoginPageDisplayed();
 
-    System.out.println("Login Page Title: "
-            + loginPage.getPageTitle());
+    Assert.assertTrue(status, "Login page is not displayed.");
 }
 }

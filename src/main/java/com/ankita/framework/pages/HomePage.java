@@ -3,21 +3,25 @@ package com.ankita.framework.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage {
+import com.ankita.framework.base.BasePage;
 
-    private WebDriver driver;
-
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-    }
+public class HomePage extends BasePage  {
+private final By homePageLogo =
+        By.xpath("//img[@alt='Website for automation practice']");
+ private final By signupLoginButton = By.linkText("Signup / Login");
+   public HomePage(WebDriver driver) {
+    super(driver);
+}
 
     public String getPageTitle() {
-        return driver.getTitle();
-    }
+    return getTitle();
+}
     public boolean isHomePageVisible() {
-    return driver.findElement(By.xpath("//img[@alt='Website for automation practice']")).isDisplayed();
-    }
-    public void clickSignupLogin() {
-    driver.findElement(By.linkText("Signup / Login")).click();
-    }
+    return isDisplayed(homePageLogo);
+}
+   
+   public LoginPage clickSignupLogin() {
+    click(signupLoginButton);
+    return new LoginPage(driver);
+}
 }

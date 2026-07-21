@@ -1,16 +1,20 @@
 package com.ankita.framework.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+import com.ankita.framework.base.BasePage;
 
-    private final WebDriver driver;
+public class LoginPage extends BasePage {
+
+    private final By loginHeader =
+            By.xpath("//h2[text()='Login to your account']");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public String getPageTitle() {
-        return driver.getTitle();
+    public boolean isLoginPageDisplayed() {
+        return isDisplayed(loginHeader);
     }
 }
